@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Scrolling Nav - Start Bootstrap Template</title>
+    <title>Soft-Dev Bash Scripting Tutorial 101</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +63,16 @@
                         <a class="page-scroll" href="#variables">Variables</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#controlFlow">Control Flow</a>
+                        <a class="page-scroll" href="#expansions">Shell Expansion</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#conditionals">Conditionals</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#loops">Loops</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#writingFunction">Writing a Function</a>
                     </li>
                     </ul>
             </div>
@@ -80,13 +89,11 @@
                   <h1>Introduction</h1>
                   <h3>Soft Dev - Ri Jiu Zheng & Masahero Masuda</h3>
                   <br>
-        		  <p>
 		          A shell script is a file interpreted and run by a Unix shell. The shell we will be using is bash, or Bourne Again shell.<br>
 		          Bash is compatible with sh scripts and as such, can run sh built-in commands in addition to bash built-in commands.<br>
 		          A list of sh built-in commands can be found <a href="https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html#Bourne-Shell-Builtins">here</a><br>
 		          A list of bash built-in commands can be found <a href="https://www.gnu.org/software/bash/manual/html_node/Bash-Builtins.html">here</a><br>
 		          The advantages of using bash are many and can be read about <a href="http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_01_02.html">here</a><br>
-		          </p>
                 </div>
             </div>
         </div>
@@ -98,14 +105,12 @@
             <div class="row">
                 <div class="col-lg-12">
                   <h1>Brief History of UNIX</h1>
-        		  <p>
 		          Back when computers were large, software was always customized to serve a specifc purpose, and software for one given system didn't run<br>
 		          on another system, making it difficult for both the users and the administrators.<br><br>
 		      
 		          In 1969 a team of developers in the Bell Labs laboratories started working on a solution problem to address these issues.<br>
 		          -->Developed a new operation system that was:<br>
 		          (1)Simple and Elegant     (2) Written in C    (3) Able to recycle code
-		          </p>
                 </div>
             </div>
         </div>
@@ -119,29 +124,21 @@
                   <h1>Types of Shell in UNIX</h1>
                   
                   <font color="blue"><h2>sh</h2></font>
-        		  <p>
 		          Aka the "Bourne-Shell" one of the original shells developed by Stephen Bourne at AT&T's Bell Labs in 1977<br>
 		          Some features include: input and output redirection, shell scripting with string and integer variables and condition testing and looping
-		          </p>
 		          
 		          <font color="blue"><h2>bash</h2></font>
-		          <p>
 		          Enhancements on the sh, aka the "Bourne-again Shell" based on sh<br>
 		          Can run sh shell scripts unchanged. Command completion and command history (new additions from sh)
-		          </p>
 		          
 		          <font color="blue"><h2>csh and tsch</h2></font>
-		          <p>
 		          csh developed by Bill Joy<br>
 		          Ken Greer developed tsch in 1978, which fixed problems in csh and added command completion (guess as you type).<br>
 		          tsch does not run bash scripts
-		          </p>
 		          
                   <font color="blue"><h2>ksh</h2></font>
-		          <p>
 		          Developed by David Korn, about the time tsch was introduced.<br>
 		          Improves on Bourne shell by adding floating point arithmetic, job control command aliasing and command completion.
-		          </p>
 		          
                 </div>
             </div>
@@ -154,7 +151,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Let's Get Started</h1>
-                    <p>
                     Every bash script begins with <code>#!/bin/bash</code>.<br>
 	                This is known as a shabang and notifies the Unix shell what program should be run to interpret the script.<br><br>
 	                Let's start with a simple Hello World script.<br>
@@ -166,7 +162,6 @@ echo "Hello World"            #prints "Hello World\n"</code></pre></div>
                     Echo simply prints out the argument, adding a new line character.<br>
                     Printf, on the other hand, allows for definition of a formatting string, much like the printf in C.<br>
                     Comments begin with a #.<br>
-                    </p>
                 </div>
             </div>
         </div>
@@ -177,7 +172,6 @@ echo "Hello World"            #prints "Hello World\n"</code></pre></div>
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Variables in Shell</h1>
-                    <p>
                     To process data/information, data must be kept in the computer's RAM. RAM is divided into small locations, <br>
                     and each location had unique number called an address, which is used to hold our data. Programmers<br>
                     can give a unique name to this address called a variable.<br><br>
@@ -191,7 +185,23 @@ echo "Hello World"            #prints "Hello World\n"</code></pre></div>
                     There are four types of variables: integers, arrays, strings, and constants.<br>
                     You can use <code>declare -a VARIABLE</code> to make a variable an array, -i for integers, and -r for constants.<br><br>
                     
-                    <h2>Shell Expansion</h2>
+                    <h2>Arrays</h2>
+                    There are a few ways to declare an array.<br>
+                    <div align="left"><pre><code>ARRAY[INDEX]=VALUE
+declare -a ARRAY
+ARRAY=(value1 value2 ...)</code></pre></div>
+                    To get the values of an array, you must use the following syntax: <code>$ARRAY[INDEX]</code>. * can be used as an index to get all the members.<br>
+                    You can use unset to remove elements from an array. <code>unset ARRAY[INDEX]</code>. If no index is specified, the entire array is removed.
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="expansions" class="grey-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Shell Expansion</h1>
                     Single quotes are used to preserve the literal value of the characters inside. A single quote cannot be enclosed between them, even if backslash escaped.<br>
                     Double quotes also preserve the values, except for the dollar sign, back ticks, and backslash, which have special meanings.<br>
                     The backslash is used for escape sequences, listed <a href="http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_08_01.html#tab_08_01">here</a>.<br>
@@ -199,35 +209,95 @@ echo "Hello World"            #prints "Hello World\n"</code></pre></div>
                     The backtick is used to return the output of a command: <code>`date`</code> will return the date.<br>
                     This can also be done with the dollar sign: <code>$(date)</code><br>
                     Arithmetic operations can be done on using the following syntax: <code>$[EXPRESSION]</code>. <a href="http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html#table_03_04">List of operators</a><br>
-                    </p>
-                    
-                    <h2>Arrays</h2>
-                    <p>
-                    There are a few ways to declare an array.<br>
-                    <code>ARRAY[INDEX]=VALUE</code><br>
-                    <code>declare -a ARRAY</code><br>
-                    <code>ARRAY=(value1 value2 ...)</code><br>
-                    To get the values of an array, you must use the following syntax: <code>$ARRAY[INDEX]</code>. * can be used as an index to get all the members.<br>
-                    </p>
-                    
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="controlFlow" class="grey-section">
+    <section id="conditionals" class="white-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Control Flow</h1>
-                    <h2>For Loops</h2>
-                    <p>
-                    <pre><code>
+                    <h1>Conditionals</h1>
+                    <h2>If Statements</h2>
+                    The general syntax for an if statement is<br>
+                    <div align="left"><pre><code>if CONDITION; then
+        COMMANDS
+    elif CONDITION; then
+        COMMANDS
+    else
+        COMMANDS
+fi</code></pre></div>
+                    A list of conditions that can be checked can be found <a href="http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_07_01.html#tab_07_01">here</a>.<br>
+                    Conditions can be simply a command. If so, then the veracity will be based on the exit status. If the exit status is 0 (presumably executed correctly), then it's true, otherwise false.<br>
+                    If the condition is an arithmetic value (enclosed in double parantheses), 0 is false and other numbers are true.<br>
+                    As usual, ! negates the value. -a is an and statement and -o is an or statement.<br>
+                    The if-else structure can be shortened to <code>CONDITION && TRUE_COMMANDS || FALSE_COMMANDS</code><br><br>
                     
-                    </code></pre>
-                    </p>
+                    <h2>Case Statements</h2>
+                    A case statement is used to compare a single expression to multiple values. Its syntax is as follows
+                    <div align="left"><pre><code>case EXPRESSION in 
+CASE1)
+    COMMANDS
+    ;;
+CASE2)
+    COMMANDS
+    ;;
+esac</code></pre></div>
                 </div>
             </div>
+        </div>
+    </section>
+    
+    <section id="loops" class="grey-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Loops</h1>
+                    <h2>For Loops</h2>
+                    The for loop is one of the three shell looping constructs. This loop allows for specification of a list of values. <br>
+                    A list of commands is executed for each value in the list. The general syntax for a for loop is as follows<br>
+                    <div align="left"><pre><code>for name in LIST; do 
+        COMMANDS;
+done</code></pre></div>
+                    
+                    <h2>While Loop</h2>
+                    The while loop executes until the test-command fails. Syntax is as follows<br>
+                    <div align="left"><pre><code>while CONTROL-COMMAND; do
+        CONSEQUENT-COMMANDS;
+done</code></pre></div>
+                    
+                    <h2>Until Loop</h2>
+                    The until loop is very similar to the while loop, except that the loop executes until the test-command executes successafully.<br>
+                    It can pretty much be thought of as the opposite of the while loop. As long as the condition is false (keeps on failing), the loop will continue.<br>
+                    The general syntax for an Until loop is as follows<br>
+                    <div align="left"><pre><code>until TEST-COMMAND; do
+        CONSQUENT-COMMANDS;
+done</code></pre></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+     <!-- Writing a Function Section -->
+    <section id="writingFunction" class="white-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                  <h1>Writing a Function</h1>
+        		  Shell functions are a way to group commands for later execution, using a single name for this group, or <i>routine</i>.<br>
+        		  The name of the routine must be unique within the shell or script. These functions are executed like regular commands.<br>
+        		  
+        		  Two general syntax for creating a function is as follows<br>
+        		  <div align="left"><pre><code>function FUNCTION_NAME {
+    COMMANDS;
+}</code></pre></div>
+        		  <b>OR</b>
+        		  <div align="left"><pre><code>FUNCTION_NAME () { 
+    COMMANDS;
+}</code></pre></div>
+                </div>
+           </div>
         </div>
     </section>
 
